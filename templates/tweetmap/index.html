@@ -1,0 +1,9 @@
+{% extends 'tweetmap/base.html' %}
+
+{% block content %}
+    <ul>
+    {% for tweet in tweets %}
+        <li>{% include 'tweetmap/includes/tweet.html' with tweet=tweet %}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

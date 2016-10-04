@@ -1,0 +1,27 @@
+{% comment %}
+<pre>{{ tweet }}</pre>
+{% endcomment %}
+<div class="tweet-container">
+    {% if tweet.is_retweet %}
+    <div class="retweet-header">
+        <span class="retweeter-full-name">{{ tweet.display_retweeter_name }}</span> retweeted:
+    </div>
+    {% endif %}
+    <div class="body">
+        <div class="profile-picture">
+            <a href="{{ tweet.display_profile_url }}">
+                <img src="{{ tweet.display_profile_image }}" />
+            </a>
+        </div>
+        <div class="content">
+            <div class="user-name">
+                <span class="full-name">{{ tweet.display_full_name }}</span>
+                <span class="display_name">@{{ tweet.display_screen_name }}</span>
+                <span class="created-at">{{ tweet.created_at | date:"d. m." }}</span>
+            </div>
+            <div class="tweet-text">
+                {{ tweet.text }}
+            </div>
+        </div>
+    </div>
+</div>
