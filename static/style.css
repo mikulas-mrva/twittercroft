@@ -1,0 +1,41 @@
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#twitter-feed {
+    position: relative;
+    margin-left: 0;
+    list-style: none;
+}
+
+div.tweet-container .body {
+    border: #aaa 1px solid;
+    margin-bottom: 1em;
+    width: 45vw;
+}
+
+div.tweet-container .body .profile-picture {
+    float: left;
+    margin: 0.3em;
+}
+
+div.tweet-container .body .content .user-name .full-name {
+    font-weight: bold;
+}
+
+div.tweet-container .body .content .user-name .display-name {
+    color: #b1bbc3;
+}
+
+div.tweet-container .body .content .user-name .created-at {
+    color: #b1bbc3;
+}
+
+div.tweet-container .body .content .tweet-text {
+    line-height: 1.4em;
+    font-weight: 400;
+}
+
+div.tweet-container .retweet-header .retweeter-full-name {
+    font-weight: bold;
+}

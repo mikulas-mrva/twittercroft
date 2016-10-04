@@ -16,10 +16,10 @@ def parse_interesting_fields(twitter_status):
             'display_profile_image': original_status.author.profile_image_url,
             'display_profile_url': original_status.author.url,
             'display_full_name': original_status.author.name,
+            'display_retweeter_name': twitter_status.author.name,
         })
     else:
         intereting_data.update({
             'is_retweet': False,
-            'display_retweeter_name': twitter_status.author.name,
         })
     return intereting_data
