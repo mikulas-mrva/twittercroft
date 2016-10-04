@@ -1,6 +1,6 @@
 def parse_interesting_fields(twitter_status):
     # todo include retweets?
-    intereting_data = {
+    interesting_data = {
         'text': twitter_status.text,
         'created_at': twitter_status.created_at,
         'display_profile_image': twitter_status.author.profile_image_url,
@@ -10,7 +10,7 @@ def parse_interesting_fields(twitter_status):
     }
     if hasattr(twitter_status, 'retweeted_status'):
         original_status = twitter_status.retweeted_status
-        intereting_data.update({
+        interesting_data.update({
             'is_retweet': True,
             'display_screen_name': original_status.author.screen_name,
             'display_profile_image': original_status.author.profile_image_url,
@@ -19,7 +19,12 @@ def parse_interesting_fields(twitter_status):
             'display_retweeter_name': twitter_status.author.name,
         })
     else:
-        intereting_data.update({
+        interesting_data.update({
             'is_retweet': False,
         })
-    return intereting_data
+    return interesting_data
+
+
+def find_country_names(tweet):
+    # todo
+    return tweet

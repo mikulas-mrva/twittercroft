@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from .utils import parse_interesting_fields
+from .utils import parse_interesting_fields, find_country_names
 
 from tweepy import OAuthHandler, API
 
@@ -24,5 +24,9 @@ class MaplecroftTwitter(object):
             parse_interesting_fields,
             self.api.user_timeline(screen_name=self.twitter_screen_name, count=number_of_tweets)
         )
-        return tweets
 
+        geotagged_tweets = map(
+            find_country_names,
+            tweets,
+        )
+        return tweets
