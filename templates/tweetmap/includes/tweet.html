@@ -7,7 +7,7 @@
         <span class="retweeter-full-name">{{ tweet.display_retweeter_name }}</span> retweeted:
     </div>
     {% endif %}
-    <div class="body">
+    <div class="tweet" data-tweet-id="{{ tweet.id }}">
         <div class="profile-picture">
             <a href="{{ tweet.display_profile_url }}">
                 <img src="{{ tweet.display_profile_image }}" />
@@ -24,12 +24,12 @@
             </div>
         </div>
     {% if tweet.country_tags %}
-        <small>
+        <span class="country-mentions">
         Mentions:
         {% for country in tweet.country_tags %}
             {{ country.name }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
-        </small>
+        </span>
     {% endif %}
     </div>
 </div>

@@ -1,9 +1,28 @@
 {% extends 'tweetmap/base.html' %}
 
 {% block content %}
-    <ol id="twitter-feed">
-    {% for tweet in tweets %}
-        <li>{% include 'tweetmap/includes/tweet.html' with tweet=tweet %}</li>
-    {% endfor %}
-    </ol>
+    <div id="page-header">
+
+    </div>
+    <div id="feed-containter">
+        <ol id="twitter-feed">
+        {% for tweet in tweets %}
+            <li>{% include 'tweetmap/includes/tweet.html' with tweet=tweet %}</li>
+        {% endfor %}
+        </ol>
+    </div>
+    <div id="map-container">
+        <div id="map-div">
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+{% if tweets_json %}
+var rows = {{ tweets_json|safe }};
+{% else %}
+    var rows = [];
+{% endif %}
+</script>
 {% endblock %}
