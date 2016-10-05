@@ -18,15 +18,17 @@ class Command(BaseCommand):
                     if rows.line_num == 1:
                         continue
 
-                    _, created = Country.objects.get_or_create(
-                        name=row[0],
-                        code=row[1],
-                        lng=None if row[2] == 'None' else row[2],
-                        lat=None if row[3] == 'None' else row[3],
-                    )
+                    if len(row):
+                        _, created = Country.objects.get_or_create(
+                            name=row[0],
+                            code=row[1],
+                            lng=None if row[2] == 'None' else row[2],
+                            lat=None if row[3] == 'None' else row[3],
+                        )
 
-                    if created:
-                        self.stdout.write('Successfully added {}.'.format(row[0]))
+                        if created:
+                            self.stdout.write('Successfully added {}.'.format(row[0]))
+                    
         except FileNotFoundError:
             self.stderr.write('File does not exist: {}'.format(options['filename']))
         else:
