@@ -19,16 +19,26 @@ class Command(BaseCommand):
                         continue
 
                     if len(row):
+                        country_name = row[0]
+                        country_code = row[1]
+                        country_camel_case_name = ''.join(map(
+                            lambda s: s[0].upper() + s[1:],
+                            row[0].split(' ')
+                        ))
+                        country_lng = None if row[2] == 'None' else row[2]
+                        country_lat = None if row[3] == 'None' else row[3]
+
                         _, created = Country.objects.get_or_create(
-                            name=row[0],
-                            code=row[1],
-                            lng=None if row[2] == 'None' else row[2],
-                            lat=None if row[3] == 'None' else row[3],
+                            name=country_name,
+                            code=country_code,
+                            camel_case_name=country_camel_case_name,
+                            lng=country_lng,
+                            lat=country_lat,
                         )
 
                         if created:
-                            self.stdout.write('Successfully added {}.'.format(row[0]))
-                    
+                            self.stdout.write('Successfully imported {}.'.format(row[0]))
+
         except FileNotFoundError:
             self.stderr.write('File does not exist: {}'.format(options['filename']))
         else:

@@ -26,5 +26,5 @@ def parse_interesting_fields(twitter_status):
 
 
 def find_country_names(tweet):
-    # todo
+
     return tweet
