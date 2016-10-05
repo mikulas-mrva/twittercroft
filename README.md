@@ -10,4 +10,8 @@ Build a simple web based web application which:
 * Displays an interactive map of the tweets where it’s possible to associate the tweet with a country or other location.
  
 
+# Installation guide
 
+* `virtualenv env --python=python3`
+
+* `./manage.py makemigrations tweetmap`

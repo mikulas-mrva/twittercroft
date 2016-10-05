@@ -21,8 +21,8 @@ class Command(BaseCommand):
                     _, created = Country.objects.get_or_create(
                         name=row[0],
                         code=row[1],
-                        lng=row[2],
-                        lat=row[3],
+                        lng=None if row[2] == 'None' else row[2],
+                        lat=None if row[3] == 'None' else row[3],
                     )
 
                     if created:
