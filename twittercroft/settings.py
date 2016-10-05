@@ -69,6 +69,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    }
+}
+
 # TODO Override those in your local settings
 TWITTER_API_CONSUMER_KEY = None
 TWITTER_API_CONSUMER_SECRET = None
