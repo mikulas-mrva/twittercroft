@@ -1,3 +1,7 @@
+import re
+
+from .models import Country
+
 def parse_interesting_fields(twitter_status):
     # todo include retweets?
     interesting_data = {
@@ -26,5 +30,35 @@ def parse_interesting_fields(twitter_status):
 
 
 def find_country_names(tweet):
+    found_countries = set()
+
+    # country names in hashtags
+    hashtag_re = re.compile('#(\w+)')
+    for result in hashtag_re.findall(tweet.get('text', '')):
+        matching_countries = Country.objects.filter(camel_case_name__iexact=result)
+        if matching_countries:
+            found_countries.add(matching_countries.first())
+
+    # capitalised country names in text
+    capitalised_name_re = re.compile('(?P<phrase>(([A-Z][a-z]+)\s?)+)')
+    for result in capitalised_name_re.findall(tweet.get('text', '')):
+        for phrase in result:
+            matching_countries = Country.objects.filter(name__iexact=phrase)
+            if matching_countries:
+                found_countries.add(matching_countries.first())
+
+            # Indian->India etc
+            if phrase[-2:] == 'an':
+                matching_countries = Country.objects.filter(name__iexact=phrase[:-1])
+                if matching_countries:
+                    found_countries.add(matching_countries.first())
+
+            # Chinese->China
+            if phrase[-3:] == 'ese':
+                matching_countries = Country.objects.filter(name__iexact=phrase[:-3]+'a')
+                if matching_countries:
+                    found_countries.add(matching_countries.first())
+
+    tweet.update({'country_tags': found_countries})
 
     return tweet

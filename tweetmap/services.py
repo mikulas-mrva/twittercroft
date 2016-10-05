@@ -29,4 +29,4 @@ class MaplecroftTwitter(object):
             find_country_names,
             tweets,
         )
-        return tweets
+        return geotagged_tweets

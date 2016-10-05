@@ -23,5 +23,13 @@
                 {{ tweet.text }}
             </div>
         </div>
+    {% if tweet.country_tags %}
+        <small>
+        Mentions:
+        {% for country in tweet.country_tags %}
+            {{ country.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        </small>
+    {% endif %}
     </div>
 </div>
