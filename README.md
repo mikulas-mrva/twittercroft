@@ -12,44 +12,45 @@ Build a simple web based web application which:
 
 # Installation guide (on Linux)
 
-Download the code
+1. Download the code
 
-* `git clone https://github.com/mikulas-mrva/twittercroft`
+    * `git clone https://github.com/mikulas-mrva/twittercroft`
 
-Start a new virtual environment with Python 3.5
+2. Start a new virtual environment with Python 3.5
 
-* `cd twittercroft`
+    * `cd twittercroft`
+    
+    * `virtualenv env --python=python3`
+    
+    * `. env/bin/activate`
 
-* `virtualenv env --python=python3`
+3. Install required packages
 
-* `. env/bin/activate`
+    * `pip install -r requirements.txt`
 
-Install required packages
+4. Migrate DB
 
-* `pip install -r requirements.txt`
+    * `./manage.py migrate`
 
-Migrate DB
+5. Import list of countries
 
-* `./manage.py migrate`
+    * `./manage.py import_countries data/countries.csv`
 
-Import list of countries
+6. Enter your Twitter App credentials
 
-* `./manage.py import_countries data/countries.csv`
-
-Enter your Twitter App credentials
-* `nano twittercroft/local_settings.py`
-
-*  ```
-    # Uncomment this if you want to run this with a debug server:
-    # DEBUG = True
-    # otherwise, uncomment and set this:
-    # ALLOWED_HOSTS = []
-
-    TWITTER_API_CONSUMER_KEY = 'your-consumer-key'
-    TWITTER_API_CONSUMER_SECRET = 'your-secret-key'
-    TWITTER_API_ACCESS_TOKEN = 'your-access-token'
-    TWITTER_API_ACCESS_SECRET = 'your-access-secret'
-
-    # uncomment and edit this if you want to access another user's tweets:
-    # TWITTER_MAPLECROFT_USER_ID = 'maplecroftrisk' 
-    ```
+    * `nano twittercroft/local_settings.py`
+        
+    * ```
+        # Uncomment this if you want to run this with a debug server:
+        # DEBUG = True
+        # otherwise, uncomment and set this:
+        # ALLOWED_HOSTS = []
+    
+        TWITTER_API_CONSUMER_KEY = 'your-consumer-key'
+        TWITTER_API_CONSUMER_SECRET = 'your-secret-key'
+        TWITTER_API_ACCESS_TOKEN = 'your-access-token'
+        TWITTER_API_ACCESS_SECRET = 'your-access-secret'
+    
+        # uncomment and edit this if you want to access another user's tweets:
+        # TWITTER_MAPLECROFT_USER_ID = 'maplecroftrisk' 
+        ```
