@@ -1,6 +1,9 @@
 {% extends 'tweetmap/base.html' %}
 
 {% block content %}
+    {% if tweepy_error %}
+    Please check that you are connected to the internet and you have entered your Twitter App credentials correctly.
+    {% else %}
     <div id="page-header">
 
     </div>
@@ -15,6 +18,7 @@
         <div id="map-div">
         </div>
     </div>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}

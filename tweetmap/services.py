@@ -19,7 +19,6 @@ class MaplecroftTwitter(object):
         if not number_of_tweets:
             number_of_tweets = settings.DEFAULT_NUMBER_OF_TWEETS
 
-        # todo cache?
         tweets = map(
             parse_interesting_fields,
             self.api.user_timeline(screen_name=self.twitter_screen_name, count=number_of_tweets)
