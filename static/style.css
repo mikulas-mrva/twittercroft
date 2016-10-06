@@ -21,6 +21,11 @@ div.tweet-container .tweet {
     padding: 0.35em;
 }
 
+div.tweet-container .highlighted {
+    /* border: #ffaaaa 1px solid; */
+    background-color: #f0f0f0;
+}
+
 div.tweet-container .tweet .profile-picture {
     float: left;
     margin: 0.3em;
@@ -53,7 +58,7 @@ div.tweet-container .retweet-header .retweeter-full-name {
     font-weight: bold;
 }
 
-div.tweet-container .country-mentions {
+div.tweet-container .mentioned-countries {
     font-size: 0.8em;
 }
 
@@ -65,7 +70,7 @@ div#map-container {
     padding: 1em;
     margin: 0;
     position: fixed;
-    top: 1em;
+    top: 0.3em;
     left: 45vw;
 
 }

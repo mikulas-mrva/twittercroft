@@ -24,7 +24,7 @@
             </div>
         </div>
     {% if tweet.country_tags %}
-        <span class="country-mentions">
+        <span class="mentioned-countries">
         Mentions:
         {% for country in tweet.country_tags %}
             {{ country.name }}{% if not forloop.last %}, {% endif %}

@@ -4,13 +4,12 @@ function unpack(rows, key) {
   return rows.map(function(row) { return row[key]; });
 }
 
-var data = [{
+var tweets = [{
     type: 'choropleth',
     locationmode: 'country names',
     locations: unpack(rows, 'country'),
     z: unpack(rows, 'number_of_mentions'),
-    text: unpack(rows, 'country'),
-    autocolorscale: true
+    text: unpack(rows, 'country')
 }];
 
 var layout = {
@@ -19,18 +18,40 @@ var layout = {
       projection: {
           type: 'robinson'
       }
-  }
+  },
+    xaxis: {domain: [0, 0.45]}
 };
 
-Plotly.plot(mapDiv, data, layout, {showLink: false});
+Plotly.plot(mapDiv, tweets, layout, {showLink: false});
 
-myPlot.on('plotly_hover', function(data){
-    var infotext = data.points.map(function(d){
-      return (d.data.name+': x= '+d.x+', y= '+d.y.toPrecision(3));
+function triggerEvent(tweetDiv, eventName) {
+    var tweetId = tweetDiv.attr('data-tweet-id');
+
+    var countries = Plotly.d3.select('#map-div').selectAll('.choroplethlocation')[0];
+
+    var countryNumber;
+    rows.forEach(function(row, n) {
+        row.tweets.forEach(function (tweet) {
+            if (tweet.id == tweetId) {
+                countryNumber = n;
+            }
+        });
     });
+    if (undefined !== countryNumber) {
+        var event = document.createEvent('SVGEvents');
+        event.initEvent(eventName,true,true);
+        countries[countryNumber].dispatchEvent(event);
+    }
+}
 
-    hoverInfo.innerHTML = infotext.join('');
-})
- .on('plotly_unhover', function(data){
-    hoverInfo.innerHTML = '';
+Plotly.d3.select("#feed-containter").selectAll(".tweet")
+    .on('mouseover', function() {
+        var tweetDiv = Plotly.d3.select(this);
+        tweetDiv.classed("highlighted", true);
+        triggerEvent(tweetDiv, 'mouseover');
+    })
+    .on("mouseout", function () {
+        var tweetDiv = Plotly.d3.select(this);
+        tweetDiv.classed("highlighted", false);
+        triggerEvent(tweetDiv, 'mouseout');
 });
