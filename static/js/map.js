@@ -9,7 +9,8 @@ var tweets = [{
     locationmode: 'country names',
     locations: unpack(rows, 'country'),
     z: unpack(rows, 'number_of_mentions'),
-    text: unpack(rows, 'country')
+    text: unpack(rows, 'country'),
+    hoverinfo: 'text'
 }];
 
 var layout = {
@@ -18,13 +19,25 @@ var layout = {
       projection: {
           type: 'robinson'
       }
-  },
-    xaxis: {domain: [0, 0.45]}
+  }
 };
 
 Plotly.plot(mapDiv, tweets, layout, {showLink: false});
 
-function triggerEvent(tweetDiv, eventName) {
+Plotly.d3.select("#feed-containter").selectAll(".tweet")
+    .on('mouseover', function() {
+        var tweetDiv = Plotly.d3.select(this);
+        tweetDiv.classed("highlighted", true);
+        triggerSVGEvent(tweetDiv, 'mouseover');
+    })
+    .on("mouseout", function () {
+        var tweetDiv = Plotly.d3.select(this);
+        tweetDiv.classed("highlighted", false);
+        triggerSVGEvent(tweetDiv, 'mouseout');
+});
+
+function triggerSVGEvent(tweetDiv, eventName) {
+    // This function is used for displaying and hiding tooltips over countries
     var tweetId = tweetDiv.attr('data-tweet-id');
 
     var countries = Plotly.d3.select('#map-div').selectAll('.choroplethlocation')[0];
@@ -43,15 +56,3 @@ function triggerEvent(tweetDiv, eventName) {
         countries[countryNumber].dispatchEvent(event);
     }
 }
-
-Plotly.d3.select("#feed-containter").selectAll(".tweet")
-    .on('mouseover', function() {
-        var tweetDiv = Plotly.d3.select(this);
-        tweetDiv.classed("highlighted", true);
-        triggerEvent(tweetDiv, 'mouseover');
-    })
-    .on("mouseout", function () {
-        var tweetDiv = Plotly.d3.select(this);
-        tweetDiv.classed("highlighted", false);
-        triggerEvent(tweetDiv, 'mouseout');
-});
