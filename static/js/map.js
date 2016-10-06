@@ -25,7 +25,7 @@ var layout = {
 Plotly.plot(mapDiv, tweets, layout, {showLink: false});
 
 // highlight tweets as well as related countries
-Plotly.d3.select("#feed-containter").selectAll(".tweet")
+Plotly.d3.select("#feed-container").selectAll(".tweet")
     .on('mouseover', function() {
         var tweetDiv = Plotly.d3.select(this);
         tweetDiv.classed("highlighted", true);

@@ -69,16 +69,15 @@ def find_country_names(tweet):
                 matching_countries = Country.objects.filter(name__iexact=phrase[:-4])
                 if matching_countries:
                     found_countries.add(matching_countries.first())
-            # todo ... perhaps add a few other trivial 'adjective detectors'
+
+            # ...perhaps add a few other trivial 'adjective detectors'
 
     tweet.update({'country_tags': found_countries})
-
     return tweet
 
 
 def tweet_to_json(tweet):
     # country_tags is a set of objects that are not serializable
-    # todo rather make the model serializable
     if 'country_tags' in tweet:
         tweet['countries'] = [c.name for c in tweet.get('country_tags', set())]
         del(tweet['country_tags'])
@@ -105,7 +104,7 @@ def group_tweets_by_country(tweets):
                         tweets_by_country[country.name].append(tweet)
                     else:
                         tweets_by_country[country.name] = [tweet]
-        except Exception as e:
+        except AttributeError:
             pass
 
     # transform to json

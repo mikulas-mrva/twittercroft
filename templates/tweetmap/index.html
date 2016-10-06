@@ -7,7 +7,7 @@
     <div id="page-header">
 
     </div>
-    <div id="feed-containter">
+    <div id="feed-container">
         <ol id="twitter-feed">
         {% for tweet in tweets %}
             <li>{% include 'tweetmap/includes/tweet.html' with tweet=tweet %}</li>

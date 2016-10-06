@@ -7,15 +7,15 @@ from .utils import group_tweets_by_country
 
 
 class IndexPage(TemplateView):
-    def get(self,request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         twitter_service = MaplecroftTwitter()
         try:
             tweet_list = list(twitter_service.get_n_latest_tweets())
-        except TweepError as e:
+        except TweepError:
             tweet_data = {'tweepy_error': True}
         else:
             tweet_data = {
-               'tweets': tweet_list,
+                'tweets': tweet_list,
                 'tweets_json': group_tweets_by_country(tweet_list),
             }
 
