@@ -60,9 +60,12 @@ div.tweet-container .country-mentions {
 /* ---- */
 
 div#map-container {
-    float: right;
     width: 50vw;
     height: 90vh;
     padding: 1em;
     margin: 0;
+    position: fixed;
+    top: 1em;
+    left: 45vw;
+
 }
