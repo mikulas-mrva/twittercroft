@@ -1,5 +1,6 @@
 # custom rules
 .idea/
+*.DS_Store
 
 twittercroft/local_settings.py
 

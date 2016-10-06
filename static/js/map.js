@@ -24,6 +24,7 @@ var layout = {
 
 Plotly.plot(mapDiv, tweets, layout, {showLink: false});
 
+// highlight tweets as well as related countries
 Plotly.d3.select("#feed-containter").selectAll(".tweet")
     .on('mouseover', function() {
         var tweetDiv = Plotly.d3.select(this);
@@ -53,6 +54,11 @@ function triggerSVGEvent(tweetDiv, eventName) {
     if (undefined !== countryNumber) {
         var event = document.createEvent('SVGEvents');
         event.initEvent(eventName,true,true);
-        countries[countryNumber].dispatchEvent(event);
+        if (countries[countryNumber] !== undefined)
+            countries[countryNumber].dispatchEvent(event);
     }
 }
+
+mapDiv.on('plotly_click', function(data){
+    // TODO filter tweets on click?
+});

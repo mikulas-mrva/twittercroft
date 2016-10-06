@@ -10,8 +10,46 @@ Build a simple web based web application which:
 * Displays an interactive map of the tweets where it’s possible to associate the tweet with a country or other location.
  
 
-# Installation guide
+# Installation guide (on Linux)
+
+Download the code
+
+* `git clone https://github.com/mikulas-mrva/twittercroft`
+
+Start a new virtual environment with Python 3.5
+
+* `cd twittercroft`
 
 * `virtualenv env --python=python3`
 
-* `./manage.py makemigrations tweetmap`
+* `. env/bin/activate`
+
+Install required packages
+
+* `pip install -r requirements.txt`
+
+Migrate DB
+
+* `./manage.py migrate`
+
+Import list of countries
+
+* `./manage.py import_countries data/countries.csv`
+
+Enter your Twitter App credentials
+* `nano twittercroft/local_settings.py`
+
+*  ```
+    # Uncomment this if you want to run this with a debug server:
+    # DEBUG = True
+    # otherwise, uncomment and set this:
+    # ALLOWED_HOSTS = []
+
+    TWITTER_API_CONSUMER_KEY = 'your-consumer-key'
+    TWITTER_API_CONSUMER_SECRET = 'your-secret-key'
+    TWITTER_API_ACCESS_TOKEN = 'your-access-token'
+    TWITTER_API_ACCESS_SECRET = 'your-access-secret'
+
+    # uncomment and edit this if you want to access another user's tweets:
+    # TWITTER_MAPLECROFT_USER_ID = 'maplecroftrisk' 
+    ```
